@@ -2,10 +2,8 @@ import sharp, { FormatEnum } from 'sharp';
 import * as fs from 'fs';
 import * as path from 'path';
 
-// Поддерживаемые форматы из sharp
 export type ImageFormat = keyof FormatEnum;
 
-// Общие опции конвертации для всех форматов
 export interface BaseConversionOptions {
   quality?: number;
   lossless?: boolean;
@@ -14,7 +12,6 @@ export interface BaseConversionOptions {
   progressive?: boolean;
 }
 
-// Специфичные опции для разных форматов
 export interface WebPConversionOptions extends BaseConversionOptions {
   nearLossless?: boolean;
   alphaQuality?: number;
@@ -64,7 +61,6 @@ export type FormatSpecificOptions =
   | AVIFConversionOptions 
   | TIFFConversionOptions;
 
-// Определяем поддерживаемые форматы
 export const SUPPORTED_FORMATS: ImageFormat[] = [
   'jpeg', 'jpg', 'png', 'webp', 'avif', 'tiff', 'gif', 'heif', 'raw'
 ];
@@ -112,7 +108,7 @@ export interface BatchConversionResults {
   totalConversionTime: number;
 }
 
-// Общие настройки для JPEG (jpg и jpeg используют одинаковые настройки)
+// Общие настройки для jpg и jpeg
 const JPEG_OPTIONS = {
   quality: 80,
   progressive: true,
@@ -120,8 +116,10 @@ const JPEG_OPTIONS = {
   optimizeCoding: true
 } as const;
 
+type FormatOptionsMap = Partial<Record<ImageFormat, Record<string, unknown>>>;
+
 export class ImageConverter {
-  private defaultOptions: Record<ImageFormat, any> = {
+  private defaultOptions: FormatOptionsMap = {
     jpeg: JPEG_OPTIONS,
     jpg: JPEG_OPTIONS,
     png: {
@@ -162,19 +160,7 @@ export class ImageConverter {
     },
     raw: {
       quality: 100
-    },
-    dz: null,
-    fits: null,
-    input: null,
-    jp2: null,
-    jxl: null,
-    magick: null,
-    openslide: null,
-    pdf: null,
-    ppm: null,
-    svg: null,
-    tif: null,
-    v: null
+    }
   };
 
   /**
