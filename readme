@@ -1,0 +1,73 @@
+```
+import { PNGtoWebPConverter, ConversionConfig, BatchConversionConfig } from './converter';
+
+async function main() {
+  const converter = new PNGtoWebPConverter();
+
+  // Пример 1: Конвертация одного файла
+  const singleFileResult = await converter.convertSingleFile({
+    inputPath: './images/logo.png',
+    outputPath: './output/logo.webp',
+    webpOptions: {
+      quality: 90,
+      effort: 6,
+      preset: 'photo'
+    },
+    overwrite: true,
+    deleteOriginal: false
+  });
+
+  // Пример 2: Пакетная конвертация
+  const batchResults = await converter.convertBatch({
+    inputDir: './input-images',
+    outputDir: './webp-output',
+    webpOptions: {
+      quality: 80,
+      alphaQuality: 90,
+      effort: 5
+    },
+    recursive: true,
+    overwrite: false,
+    deleteOriginal: false
+  });
+
+  // Пример 3: Конвертация с разными настройками для разных файлов
+  const multiResults = await converter.convertMultiple([
+    {
+      inputPath: './screenshots/screen1.png',
+      outputPath: './optimized/screen1.webp',
+      webpOptions: {
+        quality: 75,
+        nearLossless: 80,
+        smartSubsample: true
+      }
+    },
+    {
+      inputPath: './screenshots/screen2.png',
+      outputPath: './optimized/screen2.webp',
+      webpOptions: {
+        quality: 90,
+        lossless: false,
+        effort: 6
+      },
+      deleteOriginal: true
+    }
+  ]);
+
+  // Пример 4: Получение информации о файле
+  const fileInfo = await converter.getFileInfo('./images/photo.png');
+  
+  // Использование результатов
+  if (singleFileResult.success) {
+    console.log(`Конвертация успешна: ${singleFileResult.compressionRatio?.toFixed(2)}x сжатие`);
+  }
+  
+  console.log(`Пакетная конвертация: ${batchResults.converted} успешно, ${batchResults.failed} с ошибками`);
+}
+
+// Запуск
+main().catch(error => {
+  console.error('Ошибка выполнения:', error);
+  process.exit(1);
+});
+```
