@@ -3,7 +3,7 @@ import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import sharp from "sharp";
-import { ImageConverter } from "../converter.js";
+import { ImageConverter } from "../src/index.js";
 
 let directory: string;
 const converter = new ImageConverter();

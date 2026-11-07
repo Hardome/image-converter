@@ -4,7 +4,7 @@
 
 ## Запуск
 
-Требуется Node.js 22 или новее.
+Требуется Node.js 22.12 или новее.
 
 ```sh
 npm ci
@@ -16,7 +16,7 @@ npm run convert -- --input ./input --output ./output --format webp --quality 80
 ## Программный API
 
 ```ts
-import { ImageConverter } from './converter';
+import { ImageConverter } from './src/index.js';
 
 const converter = new ImageConverter();
 const result = await converter.convertSingleFile({

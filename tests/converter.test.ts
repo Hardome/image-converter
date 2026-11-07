@@ -7,7 +7,7 @@ import sharp from "sharp";
 
 sharp.cache(false);
 
-import { ImageConverter } from "../converter.js";
+import { ImageConverter } from "../src/index.js";
 
 test("batch handles aliases, collisions, nested output and corrupt files", async () => {
   const root = await fs.mkdtemp(path.join(os.tmpdir(), "converter-"));
