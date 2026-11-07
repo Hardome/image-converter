@@ -16,7 +16,7 @@ npm run convert -- --input ./input --output ./output --format webp --quality 80
 ## Программный API
 
 ```ts
-import { ImageConverter } from './converter';
+import { ImageConverter } from './src/index.js';
 
 const converter = new ImageConverter();
 const result = await converter.convertSingleFile({
