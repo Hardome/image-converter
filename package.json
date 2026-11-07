@@ -2,17 +2,24 @@
   "name": "png-to-webp-converter",
   "version": "1.0.0",
   "scripts": {
-    "convert": "ts-node index.ts",
-    "build": "tsc",
-    "start": "node dist/index.js"
+    "convert": "tsx index.ts",
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
-    "sharp": "^0.32.0"
+    "sharp": "^0.35.5"
   },
   "devDependencies": {
-    "@types/node": "^20.0.0",
-    "@types/sharp": "^0.31.0",
-    "ts-node": "^10.9.0",
-    "typescript": "^5.0.0"
-  }
+    "@types/node": "^24.19.2",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^5.1.0"
+  },
+  "engines": {
+    "node": ">=22.12"
+  },
+  "type": "module"
 }

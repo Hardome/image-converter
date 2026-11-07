@@ -1,7 +1,9 @@
 node_modules
 dist
-package-lock.json
+
 input/*
 output/*
 !input/.keep
 !output/.keep
+.vitest/
+coverage/
