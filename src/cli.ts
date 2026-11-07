@@ -29,18 +29,24 @@ export async function main() {
     quality !== undefined &&
     (!Number.isInteger(quality) || quality < 1 || quality > 100)
   )
-    throw new Error("Quality must be 1-100");
+    throw new Error("Качество должно быть целым числом от 1 до 100");
+
+  const format = parseFormat(values.format ?? "webp");
+
+  console.log(`Конвертация изображений в ${format.toUpperCase()}`);
+  console.log(`Исходная папка: ${values.input}`);
+  console.log(`Папка результата: ${values.output}`);
+  console.log("");
 
   const result = await new ImageConverter().convertBatch({
     inputDir: values.input!,
     outputDir: values.output!,
-    outputFormat: parseFormat(values.format ?? "webp"),
+    outputFormat: format,
     options: quality === undefined ? {} : { quality },
     overwrite: values.overwrite,
     recursive: values.recursive,
+    debug: true,
   });
-
-  console.log(JSON.stringify(result, null, 2));
 
   if (result.failed) process.exitCode = 1;
 }

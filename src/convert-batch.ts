@@ -3,7 +3,7 @@ import { stat } from "node:fs/promises";
 import { allocateOutputPath, findImageFiles } from "./files.js";
 import { parseFormat } from "./formats.js";
 import { convertFile } from "./convert-file.js";
-import { logBatch } from "./logging.js";
+import { logBatch, logConversion } from "./logging.js";
 import type { BatchConversionConfig, BatchConversionResults } from "./types.js";
 
 export async function convertBatch(config: BatchConversionConfig): Promise<BatchConversionResults> {
@@ -31,6 +31,8 @@ export async function convertBatch(config: BatchConversionConfig): Promise<Batch
   } catch (error) {
     result.failed++;
     result.results.push({ status: "failed", success: false, inputPath: config.inputDir, outputPath: config.outputDir, error: error instanceof Error ? error.message : String(error) });
+
+    if (config.debug) logConversion(result.results[result.results.length - 1]);
   } finally {
     result.totalConversionTime = Date.now() - started;
 
