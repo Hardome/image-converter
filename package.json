@@ -2,9 +2,9 @@
   "name": "png-to-webp-converter",
   "version": "1.0.0",
   "scripts": {
-    "convert": "tsx index.ts",
+    "convert": "tsx src/cli.ts",
     "build": "tsc -p tsconfig.build.json",
-    "start": "node dist/index.js",
+    "start": "node dist/cli.js",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest"

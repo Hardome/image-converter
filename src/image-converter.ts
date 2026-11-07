@@ -4,7 +4,6 @@ import { getFileInfo } from "./image-info.js";
 import { isFormatSupported, SUPPORTED_FORMATS } from "./formats.js";
 import type { BatchConversionConfig, ConversionConfig } from "./types.js";
 
-/** Backwards-compatible API; conversion modules own the implementation. */
 export class ImageConverter {
   convertSingleFile(config: ConversionConfig) { return convertFile(config); }
   convertBatch(config: BatchConversionConfig) { return convertBatch(config); }

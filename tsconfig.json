@@ -16,9 +16,8 @@
     "noEmit": true
   },
   "include": [
-    "index.ts",
-    "tests/**/*.ts",
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "tests/**/*.ts"
   ],
   "exclude": [
     "node_modules",

@@ -29,7 +29,7 @@ export async function main() {
     quality !== undefined &&
     (!Number.isInteger(quality) || quality < 1 || quality > 100)
   )
-    throw new Error("Quality must be 1?100");
+    throw new Error("Quality must be 1-100");
 
   const result = await new ImageConverter().convertBatch({
     inputDir: values.input!,
@@ -44,3 +44,8 @@ export async function main() {
 
   if (result.failed) process.exitCode = 1;
 }
+
+main().catch((error: unknown) => {
+  console.error(error instanceof Error ? error.message : String(error));
+  process.exitCode = 1;
+});
